@@ -1,9 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cacheKey = 'tr-social-eksi-sozluk';
+const BASE_URL = 'https://eksisozluk.com';
 
 module.exports.ENDPOINT = '/tr-social-eksi-sozluk';
-module.exports.SOURCE_URL = 'https://eksisozluk.com/basliklar/gundem';
+module.exports.SOURCE_URL = BASE_URL + '/basliklar/gundem';
 module.exports.get = async (cache) => {
   const cached = cache.get(cacheKey);
   if (cached) {
@@ -32,7 +33,7 @@ module.exports.get = async (cache) => {
     .map((title) => ({
       rank: convertThousands($('small', title).text()),
       title: $(title).html().split(' <')[0], // Get the title without <small> tag: 'example title <small>102</small>'
-      url: $(title).attr('href')
+      url: BASE_URL + $(title).attr('href')
     }))
     .sort((a, b) => b.rank - a.rank);
 
