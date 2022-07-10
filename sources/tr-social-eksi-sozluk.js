@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const cacheKey = 'tr-social-eksi-sozluk';
 const BASE_URL = 'https://eksisozluk.com';
+const SELECTOR_CONTAINER = '#partial-index .topic-list a:not(.sponsored)';
 
 module.exports.ENDPOINT = '/tr-social-eksi-sozluk';
 module.exports.SOURCE_URL = BASE_URL + '/basliklar/gundem';
@@ -29,7 +30,7 @@ module.exports.get = async (cache) => {
     return parseInt(t);
   };
 
-  const items = Array.from($('#content .topic-list a:not(.sponsored)'))
+  const items = Array.from($(SELECTOR_CONTAINER))
     .map((title) => ({
       rank: convertThousands($('small', title).text()),
       title: $(title).html().split(' <')[0], // Get the title without <small> tag: 'example title <small>102</small>'
