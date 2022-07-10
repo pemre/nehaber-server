@@ -16,6 +16,7 @@ const SERVER_ODA = require('./sources/tr-swiper-odatv');
 const SERVER_PRV = require('./sources/en-rss-ua-pravda');
 const SERVER_RFI = require('./sources/fr-rss-audio-rfi');
 const SERVER_SOZ = require('./sources/tr-swiper-sozcu');
+const SERVER_VER = require('./sources/tr-swiper-veryansintv');
 const SERVER_WTK = require('./sources/tr-rss-webtekno');
 
 // const options = {
@@ -46,6 +47,7 @@ app
   .get(SERVER_PRV.ENDPOINT, async (req, res) => res.send(await SERVER_PRV.get(cache)))
   .get(SERVER_RFI.ENDPOINT, async (req, res) => res.send(await SERVER_RFI.get(cache)))
   .get(SERVER_SOZ.ENDPOINT, async (req, res) => res.send(await SERVER_SOZ.get(cache)))
+  .get(SERVER_VER.ENDPOINT, async (req, res) => res.send(await SERVER_VER.get(cache)))
   .get(SERVER_WTK.ENDPOINT, async (req, res) => res.send(await SERVER_WTK.get(cache)))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
